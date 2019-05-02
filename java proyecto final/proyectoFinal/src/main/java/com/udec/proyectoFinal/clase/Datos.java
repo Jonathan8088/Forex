@@ -7,8 +7,13 @@ package com.udec.proyectoFinal.clase;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * 
@@ -18,6 +23,7 @@ public class Datos {
     
     static Connection con =null;
     static Statement stnt =null;
+    static ResultSet rs=null;
     String server;
     String user;
     String pass;
@@ -36,7 +42,6 @@ public class Datos {
     }
     
     
-    
      public static void envio(Usuario usuario){
             String qry = "Insert into usuario(nombre,apellido,correo,contrasena) values ("+"'" + usuario.getNombre()+ "'"+","+"'" + usuario.getApellido() + "'"+","+"'" + usuario.getEmail()+ "'"+","+"'" + usuario.getPass()+ "'"+")";
             try {
@@ -47,6 +52,62 @@ public class Datos {
         
     }
      
+      public static Boolean validacion(Usuario usuario){
+          boolean estado;
+            String qry = "SELECT * FROM public.usuario where correo="+"'" + usuario.getEmail()+ "'"+"and contrasena="+"'" + usuario.getPass()+ "'"+"";
+            try {
+                rs=stnt.executeQuery(qry);
+                rs.first();
+                if(rs.getString(4).isEmpty()){
+                     estado=false;
+                     return estado;
+                }else{
+                    estado=true;
+                    return estado;
+                }
+                
+               
+            } catch (SQLException e) {
+                System.out.println("fallo");
+            }
+        return false;
+    }
+    
+    public static ArrayList<Usuario> traerInfo(){
+            String qry = "SELECT * FROM usuario";
+            ArrayList<Usuario> listauser = new ArrayList<Usuario>();
+            try {
+                 rs=stnt.executeQuery(qry);
+                 listauser=llenado(rs);
+                 
+            } catch (SQLException e) {
+                System.out.println("fallo");
+            }
+            
+           return listauser;
+    } 
+    
+    public static ArrayList<Usuario> llenado(ResultSet rs){
+        ArrayList<Usuario> listauser = new ArrayList<Usuario>();
+        try {
+            while(rs.next()){
+               
+                    Usuario user = new Usuario();
+                    user.setNombre(rs.getString("nombre"));
+                    user.setApellido(rs.getString("apellido"));
+                    user.setEmail(rs.getString("correo"));
+                    user.setPass(rs.getString("contrasena"));
+                    
+                    listauser.add(user);
+                   
+            }
+            return listauser;
+        } catch (SQLException ex) {
+            Logger.getLogger(Datos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        listauser = null;
+        return listauser;
+    }
 
 public void connect() {
         try {

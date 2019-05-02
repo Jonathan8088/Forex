@@ -1,7 +1,9 @@
 com\udec\proyectoFinal\clase\Conexion.class
 com\udec\proyectoFinal\service\UsuarioService.class
+com\udec\proyectoFinal\utilitario\Seguridad.class
 com\udec\proyectoFinal\controller\UsuarioController.class
 com\udec\proyectoFinal\clase\Datos.class
+com\udec\proyectoFinal\service\UsuarioLogin.class
 com\udec\proyectoFinal\service\Configuration.class
 com\udec\proyectoFinal\clase\Usuario.class
 com\udec\proyectoFinal\clase\ErrorMsg.class

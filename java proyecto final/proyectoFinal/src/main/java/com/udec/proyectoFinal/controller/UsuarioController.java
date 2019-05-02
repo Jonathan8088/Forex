@@ -5,6 +5,7 @@
  */
 package com.udec.proyectoFinal.controller;
 
+import com.udec.proyectoFinal.clase.Datos;
 import com.udec.proyectoFinal.clase.ErrorMsg;
 import com.udec.proyectoFinal.clase.Usuario;
 import java.util.List;
@@ -19,13 +20,13 @@ public class UsuarioController {
     
     public ErrorMsg anadirUser(Usuario user)  {
         ErrorMsg er = new ErrorMsg();
-            if(user.getNombre().equals(' ')){
+            if(user.getNombre().isEmpty() || user.getApellido().isEmpty() || user.getEmail().isEmpty() || user.getPass().isEmpty()){
                er.setErrormsg("no se aceptan campos vacios");
                return er;
             }else{
-            
-             er.setErrormsg("Registro exitoso" +" "+"los datos son:"+" "+user.getNombre()+" "+user.getApellido()
-             +" "+user.getEmail()+" "+user.getPass());
+              Datos dat =  new Datos();
+              dat.envio(user);
+             er.setErrormsg("Registro exitoso");
                return er;
          }    
     }

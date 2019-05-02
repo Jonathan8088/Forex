@@ -29,10 +29,9 @@ public class UsuarioService {
  @POST
  @Produces(MediaType.APPLICATION_JSON)
  @Consumes(MediaType.APPLICATION_JSON)
- public Response agregarMateria(Usuario user){
+ public Response agregarUsuario(Usuario user){
      try{
-         Datos datos = new Datos();
-         datos.envio(user);
+         
         return Response.ok(us.anadirUser(user)).build();
      }catch (Exception ex){
          return Response.status(Response.Status.NOT_IMPLEMENTED).build();

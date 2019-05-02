@@ -14,7 +14,7 @@ public class Conexion {
 	int indica1,indica2;
 	Connection con=null;
 	Statement stmt=null; 
-        String contrase ="1234";
+        String contrase ="123";
         String usuario = "postgres";
 
    public Conexion() {
