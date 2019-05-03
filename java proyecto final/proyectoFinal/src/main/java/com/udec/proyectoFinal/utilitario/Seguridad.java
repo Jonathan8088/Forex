@@ -41,7 +41,7 @@ public class Seguridad {
                                         .claim("Correo", userL.getEmail())
                                         .claim("Contraseña", userL.getPass())
                                         .compact();
-                        
+                        dat.updateToken(userL,jwt);
                         return jwt;
                     }
                 }

@@ -73,6 +73,17 @@ public class Datos {
         return false;
     }
     
+     public static void updateToken(Usuario usuario,String jwt){
+          
+            String qry = "UPDATE public.usuario SET  token="+"'" + jwt+ "'"+"WHERE correo="+"'" + usuario.getEmail()+ "'"+"";
+            try {
+                stnt.executeUpdate(qry);
+            } catch (SQLException e) {
+                System.out.println("fallo");
+            }
+       
+    }
+     
     public static ArrayList<Usuario> traerInfo(){
             String qry = "SELECT * FROM usuario";
             ArrayList<Usuario> listauser = new ArrayList<Usuario>();
