@@ -21,22 +21,8 @@ import javax.ws.rs.core.Response;
  * @author David
  */
 @Stateless
-@Path("usuario")
+@Path("Logica")
 public class UsuarioService {
-    UsuarioController us = new UsuarioController();
-    
-    
- @POST
- @Produces(MediaType.APPLICATION_JSON)
- @Consumes(MediaType.APPLICATION_JSON)
- public Response agregarUsuario(Usuario user){
-     try{
-         
-        return Response.ok(us.anadirUser(user)).build();
-     }catch (Exception ex){
-         return Response.status(Response.Status.NOT_IMPLEMENTED).build();
-         
-     }         
-   }
+   
  
 }

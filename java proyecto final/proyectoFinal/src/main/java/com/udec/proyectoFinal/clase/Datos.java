@@ -32,7 +32,7 @@ public class Datos {
         
         server = "jdbc:postgresql://localhost:5432/Proyecto_final";
         user = "postgres";
-        pass = "1234";
+        pass = "123";
         
         Conexion c = new Conexion();
         if(c.indica_1()==1 && c.indica_2()==1){
@@ -43,7 +43,7 @@ public class Datos {
     
     
      public static void envio(Usuario usuario){
-            String qry = "Insert into usuario(nombre,apellido,correo,contrasena) values ("+"'" + usuario.getNombre()+ "'"+","+"'" + usuario.getApellido() + "'"+","+"'" + usuario.getEmail()+ "'"+","+"'" + usuario.getPass()+ "'"+")";
+            String qry = "Insert into usuario(nombre,apellido,correo,contrasena,token) values ("+"'" + usuario.getNombre()+ "'"+","+"'" + usuario.getApellido() + "'"+","+"'" + usuario.getEmail()+ "'"+","+"'" + usuario.getPass()+ "'"+","+"'" + "0" + "'"+")";
             try {
                 stnt.executeUpdate(qry);
             } catch (SQLException e) {
@@ -108,7 +108,7 @@ public class Datos {
                     user.setApellido(rs.getString("apellido"));
                     user.setEmail(rs.getString("correo"));
                     user.setPass(rs.getString("contrasena"));
-                    
+                    user.setToken(rs.getString("token"));
                     listauser.add(user);
                    
             }
