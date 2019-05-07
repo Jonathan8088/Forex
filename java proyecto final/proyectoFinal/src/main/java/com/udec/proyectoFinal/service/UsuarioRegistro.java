@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
  *
  * @author David
  */
-@Stateless
+@javax.enterprise.context.RequestScoped
 @Path("Registro")
 public class UsuarioRegistro {
 UsuarioController us = new UsuarioController();

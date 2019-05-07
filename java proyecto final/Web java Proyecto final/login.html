@@ -63,6 +63,7 @@
 						var token = data.jwt;
 						var decoded = jwt_decode(token);
 						console.log(decoded);
+						$(location).attr('href','index.html')
 	-->	
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -70,6 +71,7 @@
 
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="js/carhartl-jquery-cookie-92b7715/jquery.cookie.js"></script>
   <script src="js/jwt-decode-master/build/jwt-decode.min.js"></script>
    <!-- JS -->
   <script type="text/javascript">
@@ -77,7 +79,8 @@
       $(document).ready(function() {
         
             $("#Fingresar").submit(function(event) {
-              
+              		
+
                     jQuery.ajax({
 
                       url: 'http://localhost:8080/proyectoFinal/api/Login/',
@@ -89,8 +92,9 @@
                                 pass: $("#inputPassword").val()
                       }),
                       success: function(data, textStatus, xhr) {
+                       	localStorage.setItem("tokenuser", data.jwt);
                         alert("Bienvenido");
-                        $(location).attr('href','index.html')
+                        $(location).attr('href','index.html');
                       },
                       error: function(xhr, textStatus, errorThrown) {
                         alert(textStatus);
@@ -100,8 +104,7 @@
 
             });
 
-            
-
+           
       });
 
       

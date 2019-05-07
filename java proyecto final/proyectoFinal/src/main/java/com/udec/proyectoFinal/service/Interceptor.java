@@ -58,9 +58,10 @@ public class Interceptor implements ContainerRequestFilter{
     private String traerToken(String token){
         Datos dat = new Datos();
          ArrayList<Usuario> listauser = new ArrayList<Usuario>();
-         String tokenverif="";
          listauser = dat.traerInfo();
-            for (Usuario Lusuario : listauser) {
+         String tokenverif="";
+         for (Usuario Lusuario : listauser) {
+                
                 if(Lusuario.getToken().equals(token)){
                     tokenverif = Lusuario.getToken();
                     return tokenverif;

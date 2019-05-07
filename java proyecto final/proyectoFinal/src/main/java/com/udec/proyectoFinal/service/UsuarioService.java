@@ -20,9 +20,21 @@ import javax.ws.rs.core.Response;
  *
  * @author David
  */
-@Stateless
+@javax.enterprise.context.RequestScoped
 @Path("Logica")
 public class UsuarioService {
-   
- 
+  UsuarioController us = new UsuarioController(); 
+    
+ @POST
+ @Produces(MediaType.APPLICATION_JSON)
+ @Consumes(MediaType.APPLICATION_JSON)
+ public Response suma(){
+     try{
+        return Response.ok(us.suma()).build();
+     }catch (Exception ex){
+         return Response.status(Response.Status.NOT_IMPLEMENTED).build();
+         
+     }         
+   } 
+    
 }

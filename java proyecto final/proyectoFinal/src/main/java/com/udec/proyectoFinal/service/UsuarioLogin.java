@@ -24,7 +24,7 @@ import javax.ws.rs.core.Response;
  *
  * @author David
  */
-@Stateless
+@javax.enterprise.context.RequestScoped
 @Path("Login")
 public class UsuarioLogin {
     Datos dato = new Datos();

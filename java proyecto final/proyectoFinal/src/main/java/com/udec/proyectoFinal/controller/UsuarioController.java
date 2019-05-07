@@ -31,6 +31,15 @@ public class UsuarioController {
          }    
     }
     
+    public ErrorMsg suma(){
+        ErrorMsg er = new ErrorMsg();
+        int x=6,z=9;
+        int c=x+z;
+        String h = String.valueOf(c);
+        er.setErrormsg(h);
+         return er;
+    }
+    
 }
 
 
