@@ -66,7 +66,7 @@
             </div>
           </div>
           <button id="btregis"class="btn btn-primary btn-block" type="submit">Registrarse</button>
-         
+          
         </form>
         <!-----------------------------------formulario-------------------------------------------------->
         <div class="text-center">
@@ -84,41 +84,41 @@
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-   <!-- JS -->
+  <!-- JS -->
   <script type="text/javascript">
 
-      $(document).ready(function() {
+    $(document).ready(function() {
+      
+      $("#Fregistro").submit(function(event) {
         
-            $("#Fregistro").submit(function(event) {
-              
-                    jQuery.ajax({
-                      url: 'http://localhost:8080/proyectoFinal/api/Registro/',
-                      type: 'POST',
-                      dataType: 'json',
-                      contentType:'application/json',
-                      data: JSON.stringify({
-                                nombre: $("#Nombre").val(),
-                                apellido: $("#Apellido").val(),
-                                email: $("#Correo").val(),
-                                pass: $("#inputPassword").val()
-                      }),
-                      success: function(data, textStatus, xhr) {
-                        alert(data.errormsg);
-                        $(location).attr('href','login.html')
-                      },
-                      error: function(xhr, textStatus, errorThrown) {
-                        alert(textStatus);
-                      }
-                    });
-                    event.preventDefault();
-
-            });
-
-            
+        jQuery.ajax({
+          url: 'http://localhost:8080/proyectoFinal/api/Registro/',
+          type: 'POST',
+          dataType: 'json',
+          contentType:'application/json',
+          data: JSON.stringify({
+            nombre: $("#Nombre").val(),
+            apellido: $("#Apellido").val(),
+            email: $("#Correo").val(),
+            pass: $("#inputPassword").val()
+          }),
+          success: function(data, textStatus, xhr) {
+            alert(data.errormsg);
+            $(location).attr('href','login.html')
+          },
+          error: function(xhr, textStatus, errorThrown) {
+            alert(textStatus);
+          }
+        });
+        event.preventDefault();
 
       });
 
       
+
+    });
+
+    
   </script>
   <!-- JS -->
 
