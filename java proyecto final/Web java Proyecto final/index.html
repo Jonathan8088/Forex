@@ -177,19 +177,21 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <a class="close" data-dismiss="modal">×</a>
                   <h3>Desea Recargar Dinero?</h3>
+                  <a class="close" data-dismiss="modal">×</a>
+                  
                 </div>
                 <form id="contactForm" name="contact" role="form">
                   <div class="modal-body">        
                     <div class="form-group">
                       <label for="name">Ingrese el monto a comprar</label>
-                      <input type="text" name="name" class="form-control">
+                      <input type="number" value="10000"  min="10000" class="form-control" id="Valor">
                     </div>
                   </div>
                   <div class="modal-footer">          
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-success" id="submit">
+                    <button type="submit" class="btn btn-success" id="submit">Recargar</button>
+                   
                   </div>
                 </form>
               </div>
@@ -373,6 +375,28 @@ worker2.onmessage = function(event) {
 
 
 };
+
+jQuery.ajax({
+    url: 'http://localhost:8080/proyectoFinal/api/Logica/consultaDinero',
+    type: 'POST',
+    dataType: 'json',
+    headers: {"token-auto": localStorage.getItem("tokenuser")},
+    contentType:'application/json',
+    data: JSON.stringify({
+      token: localStorage.getItem("tokenuser")
+    }),
+    success: function(data, textStatus, xhr) {
+      document.getElementById("dineroActual").innerHTML = data.saldoOriginal;
+      document.getElementById("dineroCuenta").innerHTML = data.saldoOriginal;
+    },
+    error: function(xhr, textStatus, errorThrown) {
+      document.getElementById("dineroActual").innerHTML = "NaN";
+       document.getElementById("dineroCuenta").innerHTML = "NaN";
+    }
+  });
+
+
+
 }
 
 $(document).ready(function() {
@@ -390,6 +414,7 @@ $(document).ready(function() {
     contentType:'application/json',
     data: JSON.stringify({
       dinero: $("#Valor").val(),
+      token: localStorage.getItem("tokenuser")
 
     }),
     success: function(data, textStatus, xhr) {

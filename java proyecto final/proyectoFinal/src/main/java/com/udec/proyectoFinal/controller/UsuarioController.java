@@ -8,15 +8,22 @@ package com.udec.proyectoFinal.controller;
 import com.udec.proyectoFinal.clase.Datos;
 import com.udec.proyectoFinal.clase.ErrorMsg;
 import com.udec.proyectoFinal.clase.Usuario;
+import java.io.IOException;
 import java.util.List;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerRequestFilter;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
  * @author David
  */
 public class UsuarioController {
-
     
+   
     
     public ErrorMsg anadirUser(Usuario user)  {
         ErrorMsg er = new ErrorMsg();
@@ -31,13 +38,21 @@ public class UsuarioController {
          }    
     }
     
-    public ErrorMsg suma(){
-        ErrorMsg er = new ErrorMsg();
-        int x=6,z=9;
-        int c=x+z;
-        String h = String.valueOf(c);
-        er.setErrormsg(h);
-         return er;
+    public float recargaDinero(Usuario user){
+        float dinero;
+         Datos dat =  new Datos();
+        dat.updateDinero(user);
+        dinero=user.getDinero();
+        return dinero;
+    }
+    
+    
+    public float consultarDinero(Usuario user){
+        float dinero;
+         Datos dat =  new Datos();
+        
+        dinero=dat.traerDinero(user);
+        return dinero;
     }
     
 }

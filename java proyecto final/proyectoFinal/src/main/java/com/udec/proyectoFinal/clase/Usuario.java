@@ -20,16 +20,27 @@ public class Usuario {
     private String pass;
     
     private String token;
+    
+    private float dinero;
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String email, String pass, String token) {
+    public Usuario(String nombre, String apellido, String email, String pass, String token,float dinero) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.pass = pass;
         this.token = token;
+        this.dinero = dinero;
+    }
+
+    public float getDinero() {
+        return dinero;
+    }
+
+    public void setDinero(float dinero) {
+        this.dinero = dinero;
     }
 
     public String getNombre() {

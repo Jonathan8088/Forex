@@ -43,7 +43,7 @@ public class Datos {
     
     
      public static void envio(Usuario usuario){
-            String qry = "Insert into usuario(nombre,apellido,correo,contrasena,token) values ("+"'" + usuario.getNombre()+ "'"+","+"'" + usuario.getApellido() + "'"+","+"'" + usuario.getEmail()+ "'"+","+"'" + usuario.getPass()+ "'"+","+"'" + "0" + "'"+")";
+            String qry = "Insert into usuario(nombre,apellido,correo,contrasena,token,dinero) values ("+"'" + usuario.getNombre()+ "'"+","+"'" + usuario.getApellido() + "'"+","+"'" + usuario.getEmail()+ "'"+","+"'" + usuario.getPass()+ "'"+","+"'" + "0" + "'"+"," + 0 +")";
             try {
                 stnt.executeUpdate(qry);
             } catch (SQLException e) {
@@ -84,6 +84,18 @@ public class Datos {
        
     }
      
+     public static void updateDinero(Usuario usuario){
+          
+            String qry = "UPDATE public.usuario SET  dinero="+ usuario.getDinero()+"WHERE token="+"'" + usuario.getToken() + "'"+"";
+            try {
+                stnt.executeUpdate(qry);
+            } catch (SQLException e) {
+                System.out.println("fallo");
+            }
+       
+    }
+     
+     
     public static ArrayList<Usuario> traerInfo(){
             String qry = "SELECT * FROM usuario";
             ArrayList<Usuario> listauser = new ArrayList<Usuario>();
@@ -98,6 +110,35 @@ public class Datos {
            return listauser;
     } 
     
+    public static float traerDinero(Usuario user){
+            String qry = "SELECT * FROM usuario where token = "+"'"+ user.getToken()+"'";
+            float dinero=0;
+            try {
+                 rs=stnt.executeQuery(qry);
+                 dinero=llenadodinero(rs);
+                 return dinero;
+            } catch (SQLException e) {
+                System.out.println("fallo");
+            }
+            
+           return dinero;
+    } 
+    
+    public static float llenadodinero(ResultSet rs){
+        float dinero =0 ;
+        Usuario user = new Usuario();
+        try {
+            while(rs.next()){
+                user.setDinero(rs.getFloat("dinero"));
+                   
+            }
+            return user.getDinero();
+        } catch (SQLException ex) {
+            Logger.getLogger(Datos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dinero;
+    }
+    
     public static ArrayList<Usuario> llenado(ResultSet rs){
         ArrayList<Usuario> listauser = new ArrayList<Usuario>();
         try {
@@ -109,6 +150,7 @@ public class Datos {
                     user.setEmail(rs.getString("correo"));
                     user.setPass(rs.getString("contrasena"));
                     user.setToken(rs.getString("token"));
+                    user.setDinero(rs.getFloat("dinero"));
                     listauser.add(user);
                    
             }
